@@ -8,6 +8,12 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'echo VERSION=$VERSION > version.properties'
+                script {
+                  TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
+                  echo "Building"
+                  sh "docker build-t $IMAGE:$TAG ."
+                  echo '$TAG'
+                }
             }
         }
         stage('Test') {
@@ -21,14 +27,6 @@ pipeline {
             }
         }
 
-
-      stage('Build') {
-        script {
-          TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
-          echo "Building"
-          sh "docker build-t $IMAGE:$TAG ."
-        }
-      }
 
         stage('Example') {
             steps {
