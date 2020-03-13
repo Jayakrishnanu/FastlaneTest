@@ -7,13 +7,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'echo VERSION=$VERSION > version.properties'
-                script {
-                  TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
-                  echo "Building"
-                  sh "docker build-t $IMAGE:$TAG ."
-                  echo '$TAG'
-                }
+                export VERSION = 'defaults read ${INFO_PLIST} CFBundleVersionString'
+                echo 'VERSION=$VERSION > version.properties'
             }
         }
         stage('Test') {
