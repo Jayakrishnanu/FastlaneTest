@@ -6,15 +6,12 @@ pipeline {
   stages {
     stage('Running Tests') {
       steps {
-        parallel (
           "Unit Tests": {
             sh 'echo "Unit Tests"'
             sh 'fastlane scan'
-          },
-          "UI Automation": {
-            sh 'echo "UI Automation"'
+            export VERSION='defaults read ${INFO_PLIST} CFBundleVersionString'
+            sh 'echo VERSION=$VERSION > version.properties'
           }
-        )
       }
     }
 
