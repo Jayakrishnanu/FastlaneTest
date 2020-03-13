@@ -7,8 +7,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                export VERSION = 'defaults read ${INFO_PLIST} CFBundleVersionString'
-                echo 'VERSION=$VERSION > version.properties'
+                APP_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "path to your plist")
+                echo APP_VERSION=$APP_VERSION > appversion.properties;
             }
         }
         stage('Test') {
