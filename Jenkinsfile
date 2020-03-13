@@ -7,7 +7,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                export VERSION='defaults read ${INFO_PLIST} CFBundleVersionString'
                 sh 'echo VERSION=$VERSION > version.properties'
             }
         }
