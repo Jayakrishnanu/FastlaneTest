@@ -8,11 +8,15 @@ pipeline {
             steps {
                 echo 'Building..'
                 echo '${env.APP_VERSION}'
-                node {
-                  echo sh(returnStdout: true, script: 'env')
-                }
             }
         }
+
+        stage("Env variables") {
+          steps {
+            sh "printenv"
+          }
+        }
+
         stage('Test') {
             steps {
                 echo 'Testing..'
