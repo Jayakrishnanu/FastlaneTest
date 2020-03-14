@@ -5,10 +5,11 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                echo 'Building..'
-                echo '${env.APP_VERSION}'
-            }
+        script {
+              TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
+              echo "Building..."
+              sh "docker build -t $IMAGE:$TAG ."
+           }
         }
 
         stage("Env variables") {

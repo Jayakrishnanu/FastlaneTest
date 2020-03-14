@@ -32,5 +32,4 @@ platform :ios do
             workspace: "FastlaneTest.xcworkspace",
             include_bitcode: true)
   end
-
 end
