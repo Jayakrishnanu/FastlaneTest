@@ -4,8 +4,8 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-        script {
+      stage('Build') {
+          script {
               TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
               echo "Building..."
               sh "docker build -t $IMAGE:$TAG ."
