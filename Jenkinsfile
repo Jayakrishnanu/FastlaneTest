@@ -5,11 +5,13 @@ pipeline {
 
     stages {
       stage('Build') {
-          script {
-              TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
-              echo "Building..."
-              sh "docker build -t $IMAGE:$TAG ."
-           }
+          steps {
+            script {
+                TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
+                echo "Building..."
+                sh "docker build -t $IMAGE:$TAG ."
+             }
+          }
         }
 
         stage("Env variables") {
