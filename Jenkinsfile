@@ -1,36 +1,36 @@
 #!groovy
-  stages {
-      stage('Build') {
-          steps {
-            script{
-              def run = build 'quality-freestyle'
-              echo "${run.buildVariables}"
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                echo '${env.APP_VERSION}'
+                node {
+                  echo sh(returnStdout: true, script: 'env')
+                }
             }
-
-          }
-      }
-
-      stage("Env variables") {
-          steps {
-            sh "printenv"
-          }
         }
-
-      stage('Test') {
+        stage('Test') {
             steps {
                 echo 'Testing..'
             }
         }
-
-      stage('Deploy') {
+        stage('Deploy') {
             steps {
                 echo 'Deploying....'
             }
         }
-    }
-    post {
-        always {
-            echo 'I will always say Hello again!'
+
+
+        stage('Example') {
+            steps {
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "build tag ${env.BUILD_TAG} and build number ${env.BUILD_NUMBER}"
+                echo "build tag ${env.BUILD_DISPLAY_NAME} and job name ${env.JOB_NAME}"
+            }
         }
     }
 }
