@@ -17,8 +17,23 @@ default_platform(:ios)
 
 platform :ios do
   desc "Description of what the lane does"
+
   lane :custom_lane do
     # add actions here: https://docs.fastlane.tools/actions
+    my_name = "Hello there Jayakrishnan"
+    puts "#{my_name}"
+    sh('pwd')
+
+    #sh('bundle exec run get_info_plist_value parameter1:"CFBundleVersion" parameter2:"CFBundleShortVersionString"')
+    #sh('env')
+    sh('get_info_plist_value(path: './Info.plist", key: "CFBundleShortVersionString')')
+    #identifier = get_info_plist_value(path: "./Info.plist", key: "CFBundleVersion")
+    # version_number = get_info_plist_value(path: "../FastlaneTest/Info.plist", key: "CFBundleShortVersionString")
+    # build_number = get_info_plist_value(path: "../FastlaneTest/Info.plist", key: "CFBundleVersion")
+    #build_number = lane_context[SharedValues::BUILD_NUMBER]
+    puts "#{my_name}"
+    puts "#{build_number}"
+
   end
 
   lane :tests do
@@ -32,4 +47,6 @@ platform :ios do
             workspace: "FastlaneTest.xcworkspace",
             include_bitcode: true)
   end
+
+
 end

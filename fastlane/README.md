@@ -31,11 +31,6 @@ fastlane ios tests
 fastlane ios beta
 ```
 
-### ios build_for_testing
-```
-fastlane ios build_for_testing
-```
-Lane for building application
 
 ----
 
