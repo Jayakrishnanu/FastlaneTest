@@ -8,6 +8,11 @@ pipeline {
             steps {
                 echo 'Building..'
             }
+            script {
+                TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
+                echo "Building..."
+                sh "docker build -t $IMAGE:$TAG ."
+             }
         }
         stage('Test') {
             steps {
