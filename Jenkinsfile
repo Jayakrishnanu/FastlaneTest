@@ -11,7 +11,7 @@ pipeline {
                     echo "Building..."
                     plistLocation = "FastlaneTest/Info.plist"
                     iosVersion = sh(script: '/usr/libexec/PlistBuddy -c "Print $versionNumber" "' + "${plistLocation}" + '"', returnStdout: true).trim()
-                    echo "Current iOS Version is ${iosVersion}"
+                    echo "Current iOS Version is ${iosVersion['CFBundleShortVersionString']}"
 
 
                  }
