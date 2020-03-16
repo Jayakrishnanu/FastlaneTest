@@ -7,18 +7,20 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                script {
+                    TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
+                    echo "Building..."
+                    sh "docker build -t $IMAGE:$TAG ."
+                 }
             }
-            script {
-                TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
-                echo "Building..."
-                sh "docker build -t $IMAGE:$TAG ."
-             }
         }
+
         stage('Test') {
             steps {
                 echo 'Testing..'
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
