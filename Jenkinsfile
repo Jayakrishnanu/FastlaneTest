@@ -9,8 +9,8 @@ pipeline {
                 echo 'Building..'
                 script {
                     echo "Building..."
-                    VERSION = 'defaults read ${APP_PATH}/Info CFBundleShortVersionString'
-                    echo ${VERSION}
+                    iosVersion = "3.1.4"
+                    echo "Current iOS Version is ${iosVersion}"
 
                  }
             }
