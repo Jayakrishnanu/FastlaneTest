@@ -11,6 +11,8 @@ pipeline {
                     TAG = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}-develop-${BUILDS_TODAY}')
                     echo "Building..."
                     sh "docker build -t $IMAGE:$TAG ."
+                    buildNumberIs = $(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${PROJECT_DIR}/${INFOPLIST_FILE}")
+                    echo "Build number ${buildNumberIs}"
                  }
             }
         }
