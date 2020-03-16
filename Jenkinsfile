@@ -9,7 +9,9 @@ pipeline {
                 echo 'Building..'
                 script {
                     echo "Building..."
-                    echo "The plist ${INFO_PLIST}"
+                    VERSION = 'defaults read ${APP_PATH}/Info CFBundleShortVersionString'
+                    echo ${VERSION}
+
                  }
             }
         }
